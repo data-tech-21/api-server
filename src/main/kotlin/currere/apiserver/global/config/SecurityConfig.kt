@@ -17,12 +17,11 @@ class SecurityConfig {
         )
 
     @Bean
-    fun filterChain(http: HttpSecurity): SecurityFilterChain =
-        http
-            .httpBasic { it.disable() }
-            .csrf { it.disable() }
-            .sessionManagement { it.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
-            .authorizeHttpRequests { it.requestMatchers(*allowedRequests).permitAll() }
-            .formLogin { it.disable() }
-            .build()
+    fun filterChain(http: HttpSecurity): SecurityFilterChain = http
+        .httpBasic { it.disable() }
+        .csrf { it.disable() }
+        .sessionManagement { it.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
+        .authorizeHttpRequests { it.requestMatchers(*allowedRequests).permitAll() }
+        .formLogin { it.disable() }
+        .build()
 }
