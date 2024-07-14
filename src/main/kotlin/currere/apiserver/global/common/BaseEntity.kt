@@ -26,7 +26,7 @@ abstract class BaseEntity(
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
-        
+
         return id == (other as BaseEntity).id
     }
 
