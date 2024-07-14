@@ -19,7 +19,7 @@ spring:
     defer-datasource-initialization: true
 
 springdoc:
-  packages-to-scan: com.example.fatpetserver
+  packages-to-scan: currere.apiserver
   default-consumes-media-type: application/json;charset=UTF-8
   default-produces-media-type: application/json;charset=UTF-8
   swagger-ui:
