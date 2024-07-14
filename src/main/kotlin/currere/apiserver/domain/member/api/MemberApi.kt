@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.ResponseStatus
 
 @Tag(name = "Member API")
 interface MemberApi {
-
     @Operation(summary = "회원가입")
     @PostMapping("/signin")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
