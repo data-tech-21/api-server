@@ -17,9 +17,11 @@ abstract class BaseEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = DEFAULT_ID,
+
     @CreatedDate
     @Column(nullable = false, updatable = false)
     var createdDate: LocalDateTime = LocalDateTime.MIN,
+
     @LastModifiedDate
     @Column(nullable = false)
     var updatedDate: LocalDateTime = LocalDateTime.MIN,
