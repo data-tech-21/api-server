@@ -9,9 +9,6 @@ import jakarta.persistence.Table
 @Table(name = "member")
 class Member(
     @Column(nullable = false)
-    val studentId: String,
-
-    @Column(nullable = false)
     val name: String,
 
     @Column(nullable = false)

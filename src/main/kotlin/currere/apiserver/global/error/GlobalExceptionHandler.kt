@@ -1,6 +1,5 @@
 package currere.apiserver.global.error
 
-
 import currere.apiserver.global.common.ApiResponse
 import io.github.oshai.kotlinlogging.KotlinLogging
 import jakarta.persistence.EntityNotFoundException
