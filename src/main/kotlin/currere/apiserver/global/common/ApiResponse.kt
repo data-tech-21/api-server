@@ -7,6 +7,6 @@ data class ApiResponse<T>(
     companion object {
         fun <T> success(body: T?): ApiResponse<T> = ApiResponse(body = body)
 
-        fun error(message: String): ApiResponse<Unit> = ApiResponse(message = message)
+        fun error(message: String?): ApiResponse<Unit> = ApiResponse(message = message)
     }
 }

@@ -21,9 +21,11 @@ repositories {
     mavenCentral()
 }
 
+val kotlinLoggingVersion = "7.0.0"
 val springdocVersion = "2.5.0"
 
-fun isAppleSilicon() = System.getProperty("os.name") == "Mac OS X" && System.getProperty("os.arch") == "aarch64"
+fun isAppleSilicon() =
+    System.getProperty("os.name") == "Mac OS X" && System.getProperty("os.arch") == "aarch64"
 
 dependencies {
     // spring
@@ -36,6 +38,9 @@ dependencies {
     // kotlin
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
+
+    // logger
+    implementation("io.github.oshai:kotlin-logging-jvm:7.0.0")
 
     // database
     runtimeOnly("com.mysql:mysql-connector-j")
