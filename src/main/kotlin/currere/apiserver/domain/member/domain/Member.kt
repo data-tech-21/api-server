@@ -8,15 +8,15 @@ import jakarta.persistence.Table
 @Entity
 @Table(name = "member")
 class Member(
-    @Column(nullable = true)
+    @Column(nullable = false)
     val studentId: String,
 
-    @Column(nullable = true)
+    @Column(nullable = false)
     val name: String,
 
-    @Column(nullable = true)
+    @Column(nullable = false)
     val email: String,
 
-    @Column(nullable = true)
+    @Column(nullable = false)
     val password: String,
 ) : BaseEntity()
