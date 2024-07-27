@@ -24,11 +24,9 @@ class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException::class)
     fun handleMethodArgumentNotValidException(exception: MethodArgumentNotValidException): ApiResponse<Unit> {
-        val message =
-            exception.bindingResult.allErrors
-                .map {
-                    it.defaultMessage
-                }.joinToString(" ")
+        val message = exception.bindingResult.allErrors
+            .map { it.defaultMessage }
+            .joinToString(" ")
 
         logger.warn { message }
 
