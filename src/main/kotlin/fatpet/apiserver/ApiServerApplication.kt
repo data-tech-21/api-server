@@ -1,4 +1,4 @@
-package currere.apiserver
+package fatpet.apiserver
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication

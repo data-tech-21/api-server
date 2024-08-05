@@ -8,7 +8,7 @@ plugins {
     kotlin("plugin.spring") version "1.9.24"
 }
 
-group = "currere"
+group = "fatpet"
 version = "0.0.1-SNAPSHOT"
 
 java {
