@@ -7,5 +7,5 @@ data class DiagnoseResponse(
     val avgWeightHigh: Int,
     val bcs: Bcs,
     val der: Float,
-    val gptSolution: String,
+    val gptSolution: List<String>,
 )

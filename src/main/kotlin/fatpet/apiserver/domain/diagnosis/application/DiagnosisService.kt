@@ -82,7 +82,7 @@ class DiagnosisService(
         weight: Float,
         bcs: Bcs,
         der: Float,
-    ): String {
+    ): List<String> {
         TODO()
     }
 }

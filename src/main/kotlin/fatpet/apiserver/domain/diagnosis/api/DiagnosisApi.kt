@@ -1,6 +1,7 @@
 package fatpet.apiserver.domain.diagnosis.api
 
 import fatpet.apiserver.domain.diagnosis.dto.request.DiagnoseRequest
+import fatpet.apiserver.domain.diagnosis.dto.response.DiagnoseResponse
 import fatpet.apiserver.global.common.ApiResponse
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
@@ -15,5 +16,5 @@ interface DiagnosisApi {
     @Operation(summary = "비만도 진단")
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    fun diagnose(request: DiagnoseRequest): ApiResponse<Unit>
+    fun diagnose(request: DiagnoseRequest): ApiResponse<DiagnoseResponse>
 }
