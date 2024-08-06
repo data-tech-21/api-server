@@ -5,7 +5,7 @@ import jakarta.validation.constraints.Min
 import jakarta.validation.constraints.NotNull
 
 data class DiagnoseRequest(
-    @field:NotNull(message = "품종 식별자는 필수 입력값입니다.")
+    @field:NotNull(message = "품종 코드는 필수 입력값입니다.")
     val breedCode: Int,
 
     @field:NotNull(message = "성별은 필수 입력값입니다.")
