@@ -19,7 +19,7 @@ class Breed(
     val sex: Sex,
 
     @Column(nullable = false)
-    val name: String,
+    val nameEng: String,
 
     @Column(nullable = false)
     val nameKor: String,
