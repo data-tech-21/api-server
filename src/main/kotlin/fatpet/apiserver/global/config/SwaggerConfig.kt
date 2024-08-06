@@ -11,7 +11,7 @@ class SwaggerConfig {
     fun swaggerApi(): OpenAPI = OpenAPI()
         .info(
             Info()
-                .title("currere API Documentation")
+                .title("Fatpet_v2 API Documentation")
                 .description("팻펫v2 API 문서")
                 .version("0.0.0"),
         )
