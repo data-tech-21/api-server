@@ -1,29 +1,22 @@
 package fatpet.apiserver.domain.diagnosis.application
 
-import fatpet.apiserver.domain.breed.dao.BreedRepository
+import fatpet.apiserver.domain.breed.application.BreedReader
 import fatpet.apiserver.domain.breed.domain.Breed
 import fatpet.apiserver.domain.breed.domain.Sex
 import fatpet.apiserver.domain.diagnosis.dto.request.DiagnoseRequest
 import fatpet.apiserver.domain.diagnosis.dto.response.DiagnoseResponse
-import org.apache.coyote.BadRequestException
 import org.springframework.stereotype.Service
 
 @Service
 class DiagnosisService(
-    private val breedRepository: BreedRepository,
+    private val breedReader: BreedReader,
 ) {
     fun diagnose(request: DiagnoseRequest): DiagnoseResponse {
         val (breedCode, sex, isNeutered, ageMonths, weight, neckSize, chestSize) = request
 
-        val sexCode = if (sex == Sex.MALE) {
-            if (isNeutered) 0
-            else 2
-        } else {
-            if (isNeutered) 3
-            else 1
-        }
+        val breed = breedReader.findByCode(breedCode)
 
-        val breed = breedRepository.findByCode(breedCode) ?: throw BadRequestException()
+        val sexCode = getSexCode(sex, isNeutered)
 
         val bcs = getBcs(breed, sexCode, ageMonths, weight, neckSize, chestSize)
 
@@ -40,7 +33,16 @@ class DiagnosisService(
         )
     }
 
-    fun getBcs(
+    private fun getSexCode(sex: Sex, isNeutered: Boolean): Int =
+        if (sex == Sex.MALE) {
+            if (isNeutered) 0
+            else 2
+        } else {
+            if (isNeutered) 3
+            else 1
+        }
+
+    private fun getBcs(
         breed: Breed,
         sexCode: Int,
         ageMonths: Int,
@@ -53,29 +55,25 @@ class DiagnosisService(
 
     private fun getRer(weight: Float): Float = weight * 30 + 70
 
-    fun getDer(isNeutered: Boolean, ageMonths: Int, weight: Float, bcs: Bcs): Float {
+    private fun getDer(isNeutered: Boolean, ageMonths: Int, weight: Float, bcs: Bcs): Float {
+        val isObesity = bcs == Bcs.OVER
+
+        val coefficient = when {
+            ageMonths < 4 -> 3F
+            ageMonths < 18 -> 2F
+            ageMonths < 84 && isObesity -> 1.2F
+            ageMonths < 84 && isNeutered -> 1.6F
+            ageMonths < 84 -> 1.8F
+            isNeutered -> 1.2F
+            else -> 1.4F
+        }
+
         val rer = getRer(weight)
 
-        if (ageMonths < 4) {
-            return rer * 3F
-        }
-
-        if (ageMonths < 18) {
-            return rer * 2F
-        }
-
-        if (bcs == Bcs.OVER) {
-            return rer * 1.2F
-        }
-
-        return if (isNeutered) {
-            rer * 1.6F
-        } else {
-            rer * 1.8F
-        }
+        return rer * coefficient
     }
 
-    fun getGptSolution(
+    private fun getGptSolution(
         breed: Breed,
         isNeutered: Boolean,
         ageMonths: Int,
